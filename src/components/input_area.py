@@ -1,5 +1,5 @@
-from PyQt6.QtWidgets import QFrame, QHBoxLayout, QVBoxLayout, QTextEdit, QPushButton, QLabel, QProgressBar, QGraphicsOpacityEffect
-from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtWidgets import QFrame, QHBoxLayout, QVBoxLayout, QTextEdit, QPushButton, QLabel, QProgressBar, QGraphicsOpacityEffect, QSpacerItem, QSizePolicy
+from PyQt6.QtCore import pyqtSignal
 
 class InputArea(QFrame): 
     # 메시지가 전송 신호
@@ -9,39 +9,45 @@ class InputArea(QFrame):
         super().__init__()
         
         self.setStyleSheet("background-color: #ede5d3;")
-        self.setFixedHeight(160)
+        self.setFixedHeight(180)
 
         # 전체 수직 레이아웃
         main_vbox = QVBoxLayout()
-        main_vbox.setContentsMargins(20, 10, 20, 20)
-        main_vbox.setSpacing(5)
+        main_vbox.setContentsMargins(20, 0, 20, 60) 
+        main_vbox.setSpacing(0)
 
-        # 상태 메시지
+        # 상태 메시지 영역
         self.loading_container = QFrame()
         loading_layout = QHBoxLayout(self.loading_container)
         loading_layout.setContentsMargins(0, 0, 0, 0)
+        loading_layout.setSpacing(10)
+
+        loading_layout.addStretch()
 
         self.loading_label = QLabel("AI가 답변을 생성 중입니다...")
         self.loading_label.setStyleSheet("color: #4A4A4A; font-size: 12px; font-weight: bold;")
         
+        # 로딩바 설정
         self.progress_bar = QProgressBar()
-        self.progress_bar.setFixedHeight(10)
+        self.progress_bar.setFixedHeight(8) 
+        self.progress_bar.setFixedWidth(150)
         self.progress_bar.setRange(0, 0) 
         self.progress_bar.setTextVisible(False)
         self.progress_bar.setStyleSheet("""
-            QProgressBar { border: 1px solid #CCCCCC; border-radius: 5px; background-color: white; }
+            QProgressBar { border: 1px solid #CCCCCC; border-radius: 4px; background-color: white; }
             QProgressBar::chunk { background-color: #4A4A4A; }
         """)
 
         loading_layout.addWidget(self.loading_label)
         loading_layout.addWidget(self.progress_bar)
+        loading_layout.addStretch()
         
         # 투명도 설정
         self.opacity_effect = QGraphicsOpacityEffect(self.loading_container)
         self.loading_container.setGraphicsEffect(self.opacity_effect)
-        self.opacity_effect.setOpacity(0.0) # 처음에는 투명하게
+        self.opacity_effect.setOpacity(0.0) 
 
-        # 가로 레이아웃 생성
+        # 가로 레이아웃 생성 (입력창 + 버튼)
         layout = QHBoxLayout()
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(10) 
@@ -49,7 +55,7 @@ class InputArea(QFrame):
         # 인풋 박스
         self.text_input = QTextEdit()
         self.text_input.setPlaceholderText("여기에 질문을 입력하세요")
-        self.text_input.setFixedHeight(60)
+        self.text_input.setFixedHeight(80)
         self.text_input.setStyleSheet("background-color: white; border: 1px solid #CCCCCC; border-radius: 5px; padding: 10px; font-size: 14px;")
         
         # 전송 버튼
@@ -71,16 +77,16 @@ class InputArea(QFrame):
     def on_click_send(self):
         text = self.text_input.toPlainText().strip()
         if text:
-            self.clicked_send.emit(text) # 신호 전송
+            self.clicked_send.emit(text) 
 
     # 투명도 변경 로직
     def set_loading(self, is_loading):
         if is_loading:
-            self.opacity_effect.setOpacity(1.0) # 불투명
+            self.opacity_effect.setOpacity(1.0) 
             self.send_button.setEnabled(False)
             self.text_input.setEnabled(False)
         else:
-            self.opacity_effect.setOpacity(0.0) # 투명
+            self.opacity_effect.setOpacity(0.0) 
             self.send_button.setEnabled(True)
             self.text_input.setEnabled(True)
             self.text_input.clear()
