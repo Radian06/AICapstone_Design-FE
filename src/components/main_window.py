@@ -1,6 +1,9 @@
 from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QFrame, QLabel
 from PyQt6.QtCore import QSize, Qt
 
+# componentes 불러오기
+from components.input_area import InputArea
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -43,20 +46,12 @@ class MainWindow(QMainWindow):
         chat_area.setLayout(chat_layout)
 
         # 입력창 영역
-        input_area = QFrame()
-        input_area.setStyleSheet("background-color: #e4f532;")
-        input_area.setFixedHeight(160) # 높이 고정
-        
-        input_layout = QHBoxLayout()
-        input_label = QLabel("사용자 질문 입력 칸 및 전송 버튼 구역")
-        input_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        input_layout.addWidget(input_label)
-        input_area.setLayout(input_layout)
+        self.input_widget = InputArea()
 
         # 조립
         # 오른쪽 영역
         right_layout.addWidget(chat_area)
-        right_layout.addWidget(input_area)
+        right_layout.addWidget(self.input_widget)
         right_widget.setLayout(right_layout)
 
         # 메인 영역
