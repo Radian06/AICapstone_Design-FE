@@ -1,8 +1,8 @@
 from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QFrame, QLabel
 from PyQt6.QtCore import QSize, Qt, QTimer
 
-# componentes 불러오기
-from components.input_area import InputArea
+# areas 불러오기
+from areas.input_area import InputArea
 
 class MainWindow(QMainWindow):
     def __init__(self):
