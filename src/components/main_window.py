@@ -1,5 +1,8 @@
 from PyQt6.QtWidgets import QMainWindow, QWidget, QHBoxLayout, QVBoxLayout, QFrame, QLabel
-from PyQt6.QtCore import QSize, Qt
+from PyQt6.QtCore import QSize, Qt, QTimer
+
+# componentes 불러오기
+from components.input_area import InputArea
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -34,7 +37,7 @@ class MainWindow(QMainWindow):
 
         # 대화창 영역
         chat_area = QFrame()
-        chat_area.setStyleSheet("background-color: #F4F4F4;") # 밝은 회색 바탕
+        chat_area.setStyleSheet("background-color: #F4F4F4;")
         
         chat_layout = QVBoxLayout()
         chat_label = QLabel("사용자 / 챗봇 대화가 표시되는 구역")
@@ -43,20 +46,16 @@ class MainWindow(QMainWindow):
         chat_area.setLayout(chat_layout)
 
         # 입력창 영역
-        input_area = QFrame()
-        input_area.setStyleSheet("background-color: #e4f532;")
-        input_area.setFixedHeight(160) # 높이 고정
+        self.input_widget = InputArea()
         
-        input_layout = QHBoxLayout()
-        input_label = QLabel("사용자 질문 입력 칸 및 전송 버튼 구역")
-        input_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        input_layout.addWidget(input_label)
-        input_area.setLayout(input_layout)
+        # --- 신호 연결 ---
+        # InputArea의 'clicked_send' 신호 'handle_send_question'에 연결
+        self.input_widget.clicked_send.connect(self.handle_send_question)
 
         # 조립
         # 오른쪽 영역
         right_layout.addWidget(chat_area)
-        right_layout.addWidget(input_area)
+        right_layout.addWidget(self.input_widget)
         right_widget.setLayout(right_layout)
 
         # 메인 영역
@@ -65,3 +64,22 @@ class MainWindow(QMainWindow):
         
         main_widget.setLayout(main_layout)
         self.setCentralWidget(main_widget)
+
+    # 질문 전송 컨트롤 로직
+    def handle_send_question(self, text):
+        """
+        사용자가 입력한 텍스트를 처리하고 AI 응답을 기다리는 함수
+        """
+        print(f"전송된 질문: {text}")
+        
+        # 로딩 상태 시작
+        self.input_widget.set_loading(True)
+        
+        # AI 응답 대기
+        # 테스트를 위해 3초 뒤에 로딩을 해제하도록 타이머 설정
+        QTimer.singleShot(3000, self.finish_loading)
+
+    def finish_loading(self):
+        # 로딩 상태 해제
+        self.input_widget.set_loading(False)
+        print("AI 응답이 완료되었습니다.")
