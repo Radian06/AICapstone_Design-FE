@@ -35,9 +35,9 @@ class ChatBubble(QWidget):
         if is_user:
             # 사용자
             self.profile.setText("U")
-            self.profile.setStyleSheet("background-color: #E0E0E0; color: #333333; font-weight: bold; border-radius: 30px;")
+            self.profile.setStyleSheet("background-color: #E0E0E0; color: #25343F; font-weight: bold; border-radius: 30px; border: 2px solid #25343F;")
             
-            self.bubble_frame.setStyleSheet("background-color: #DCF8C6; border-radius: 10px;")
+            self.bubble_frame.setStyleSheet("background-color: #BFC9D1; border-radius: 10px;")
             
             # 배치
             main_layout.addStretch()
@@ -47,7 +47,7 @@ class ChatBubble(QWidget):
         else:
             # 챗봇
             self.profile.setText("AI")
-            self.profile.setStyleSheet("background-color: #4A4A4A; color: white; font-weight: bold; border-radius: 30px;")
+            self.profile.setStyleSheet("background-color: #4A4A4A; color: white; font-weight: bold; border-radius: 30px; border: 2px solid #25343F;")
             
             self.bubble_frame.setStyleSheet("background-color: #FFFFFF; border-radius: 10px;")
             
