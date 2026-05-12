@@ -13,7 +13,7 @@ class InputArea(QFrame):
 
         # 전체 수직 레이아웃
         main_vbox = QVBoxLayout()
-        main_vbox.setContentsMargins(20, 0, 20, 60) 
+        main_vbox.setContentsMargins(40, 0, 40, 60) 
         main_vbox.setSpacing(0)
 
         # 상태 메시지 영역

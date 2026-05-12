@@ -7,6 +7,7 @@ class ChatArea(QWidget):
         super().__init__()
         # 레이아웃 설정
         self.chat_layout = QVBoxLayout(self)
+        self.chat_layout.setContentsMargins(40, 60, 40, 20) 
         
         # 테스트용 메시지 바로 추가 
         self.add_message("챗봇 테스트 메시지입니다.", is_user=False)
