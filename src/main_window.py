@@ -4,6 +4,7 @@ from PyQt6.QtCore import QSize, Qt, QTimer
 # areas 불러오기
 from areas.input_area import InputArea
 from areas.chat_area import ChatArea
+from areas.history_area import HistoryArea
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -19,16 +20,7 @@ class MainWindow(QMainWindow):
         main_layout.setSpacing(0) # gap 제거
         
         # 왼쪽 사이드바 (과거 기록)
-        sidebar = QFrame()
-        sidebar.setStyleSheet("background-color: #4A4A4A;")
-        sidebar.setFixedWidth(250) # 너비 고정
-        
-        sidebar_layout = QVBoxLayout()
-        sidebar_label = QLabel("과거 질문 내역")
-        sidebar_label.setStyleSheet("color: white; font-weight: bold;")
-        sidebar_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        sidebar_layout.addWidget(sidebar_label)
-        sidebar.setLayout(sidebar_layout)
+        self.sidebar_widget = HistoryArea()
 
         # 오른쪽 전체 영역
         right_widget = QWidget()
@@ -54,7 +46,7 @@ class MainWindow(QMainWindow):
         right_widget.setLayout(right_layout)
 
         # 메인 영역
-        main_layout.addWidget(sidebar)
+        main_layout.addWidget(self.sidebar_widget)
         main_layout.addWidget(right_widget)
         
         main_widget.setLayout(main_layout)
