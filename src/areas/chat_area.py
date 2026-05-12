@@ -1,17 +1,43 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QScrollArea, QFrame
 from PyQt6.QtCore import Qt
 from components.chat_bubble import ChatBubble
 
 class ChatArea(QWidget):
     def __init__(self):
         super().__init__()
-        # 레이아웃 설정
-        self.chat_layout = QVBoxLayout(self)
-        self.chat_layout.setContentsMargins(40, 60, 40, 20) 
         
-        # 테스트용 메시지 바로 추가 
+        # ChatArea 자체의 레이아웃
+        self.main_layout = QVBoxLayout(self)
+        self.main_layout.setContentsMargins(0, 60, 0, 0)
+        
+        # 스크롤 영역 생성 및 설정
+        self.scroll_area = QScrollArea()
+        self.scroll_area.setWidgetResizable(True) # 내부 위젯 크기 자동 조절
+        self.scroll_area.setFrameShape(QFrame.Shape.NoFrame) # 테두리 제거
+        self.scroll_area.setStyleSheet("background-color: #EAEFEF;") # 배경색 설정
+        
+        # 스크롤 안에 들어갈 실제 메시지 표시용 위젯
+        self.content_widget = QWidget()
+        self.content_widget.setStyleSheet("background-color: transparent;")
+        
+        # 레이아웃 설정
+        self.chat_layout = QVBoxLayout(self.content_widget)
+        self.chat_layout.setContentsMargins(40, 0, 40, 20) 
+        self.chat_layout.setSpacing(40)
+        
+        # 조립
+        self.scroll_area.setWidget(self.content_widget)
+        self.main_layout.addWidget(self.scroll_area)
+        
+        # 테스트용 메시지 추가 
         self.add_message("챗봇 테스트 메시지입니다.", is_user=False)
         self.add_message("사용자 테스트 메시지입니다. 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트", is_user=True)
+        self.add_message("챗봇 테스트 메시지입니다.", is_user=False)
+        self.add_message("사용자 테스트 메시지입니다. 테스트 테스트 테스트", is_user=True)
+        self.add_message("챗봇 테스트 메시지입니다. 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트", is_user=False)
+        self.add_message("사용자 테스트 메시지입니다. 테스트 테스트", is_user=True)
+        self.add_message("챗봇 테스트 메시지입니다. 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트", is_user=False)
+        self.add_message("사용자 테스트 메시지입니다. 테스트 테스트", is_user=True)
         
         # 위로 붙게 만들기 위해 빈 공간 추가
         self.chat_layout.addStretch()
