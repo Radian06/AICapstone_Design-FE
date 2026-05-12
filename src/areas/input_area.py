@@ -25,7 +25,7 @@ class InputArea(QFrame):
         loading_layout.addStretch()
 
         self.loading_label = QLabel("AI가 답변을 생성 중입니다...")
-        self.loading_label.setStyleSheet("color: #4A4A4A; font-size: 12px; font-weight: bold;")
+        self.loading_label.setStyleSheet("color: #25343F; font-size: 12px; font-weight: bold;")
         
         # 로딩바 설정
         self.progress_bar = QProgressBar()
@@ -34,8 +34,8 @@ class InputArea(QFrame):
         self.progress_bar.setRange(0, 0) 
         self.progress_bar.setTextVisible(False)
         self.progress_bar.setStyleSheet("""
-            QProgressBar { border: 1px solid #CCCCCC; border-radius: 4px; background-color: white; }
-            QProgressBar::chunk { background-color: #4A4A4A; }
+            QProgressBar { border: 1px solid #25343F; border-radius: 4px; background-color: white; }
+            QProgressBar::chunk { background-color: #25343F; }
         """)
 
         loading_layout.addWidget(self.loading_label)

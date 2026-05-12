@@ -34,6 +34,7 @@ class MainWindow(QMainWindow):
         right_widget = QWidget()
         right_layout = QVBoxLayout() # flex-col
         right_layout.setContentsMargins(0, 0, 0, 0)
+        right_widget.setStyleSheet("background-color: #EAEFEF;")
         right_layout.setSpacing(0)
 
         # 대화창 영역
