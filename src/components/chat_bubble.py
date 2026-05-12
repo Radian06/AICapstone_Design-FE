@@ -35,24 +35,34 @@ class ChatBubble(QWidget):
         # 타입에 따른 스타일 설정
         if is_user:
             # 사용자
-            self.profile.setText("U")
-            self.profile.setStyleSheet("background-color: #E0E0E0; color: #25343F; font-weight: bold; border-radius: 30px; border: 2px solid #25343F;")
+            self.profile.setStyleSheet("""
+                image: url('src/assets/user.png');
+                padding: 10px;
+                background-color: #E0E0E0;
+                border-radius: 30px; 
+                border: 2px solid #25343F;
+            """)
             
             self.bubble_frame.setStyleSheet("background-color: #BFC9D1; border-radius: 10px;")
             
             # 배치
             main_layout.addStretch()
             main_layout.addWidget(self.bubble_frame)
-            main_layout.addWidget(self.profile, alignment=Qt.AlignmentFlag.AlignTop) # 프로필을 위쪽으로 정렬
+            main_layout.addWidget(self.profile, alignment=Qt.AlignmentFlag.AlignTop)
             
         else:
             # 챗봇
-            self.profile.setText("AI")
-            self.profile.setStyleSheet("background-color: #4A4A4A; color: white; font-weight: bold; border-radius: 30px; border: 2px solid #25343F;")
+            self.profile.setStyleSheet("""
+                image: url('src/assets/chat-ai.png');
+                padding: 10px;
+                background-color: #E0E0E0; 
+                border-radius: 30px; 
+                border: 2px solid #25343F;
+            """)
             
             self.bubble_frame.setStyleSheet("background-color: #FFFFFF; border-radius: 10px;")
             
             # 배치
-            main_layout.addWidget(self.profile, alignment=Qt.AlignmentFlag.AlignTop) # 프로필을 위쪽으로 정렬
+            main_layout.addWidget(self.profile, alignment=Qt.AlignmentFlag.AlignTop)
             main_layout.addWidget(self.bubble_frame)
             main_layout.addStretch()
