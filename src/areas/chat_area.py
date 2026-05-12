@@ -10,7 +10,7 @@ class ChatArea(QWidget):
         
         # 테스트용 메시지 바로 추가 
         self.add_message("챗봇 테스트 메시지입니다.", is_user=False)
-        self.add_message("사용자 테스트 메시지입니다.", is_user=True)
+        self.add_message("사용자 테스트 메시지입니다. 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트 테스트", is_user=True)
         
         # 위로 붙게 만들기 위해 빈 공간 추가
         self.chat_layout.addStretch()
