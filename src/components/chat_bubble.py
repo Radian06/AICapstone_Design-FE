@@ -17,19 +17,19 @@ class ChatBubble(QWidget):
         
         # 말풍선
         self.bubble_frame = QFrame()
-        self.bubble_frame.setMaximumWidth(600)
+        self.bubble_frame.setMaximumWidth(500)
         self.bubble_frame.setMinimumHeight(40)
         self.bubble_frame.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Minimum)
 
         # 말풍선 안의 텍스트 레이아웃
         bubble_layout = QVBoxLayout(self.bubble_frame)
-        bubble_layout.setContentsMargins(20, 10, 20, 10) 
+        bubble_layout.setContentsMargins(25, 15, 25, 15) 
         bubble_layout.setSpacing(0)
         
         self.label = QLabel(text)
         self.label.setWordWrap(True) # 긴 문장 자동 줄바꿈
         self.label.setSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
-        self.label.setStyleSheet("background: transparent; border: none; padding: 0px;")
+        self.label.setStyleSheet("background: transparent; border: none; padding: 0px; font-size: 14px;")
         bubble_layout.addWidget(self.label)
         
         # 타입에 따른 스타일 설정
